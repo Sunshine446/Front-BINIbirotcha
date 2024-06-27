@@ -19,27 +19,6 @@ class _MenuState extends State<Menu> {
      Product(productName: "Bini Holographic Stickers", price: 199.99),
    ];
 
-   Widget cardTemplate(product){
-     return Card(
-       color: Colors.pink[100],
-       child: Padding(
-         padding: const EdgeInsets.all(10.0),
-         child: Column(
-           crossAxisAlignment: CrossAxisAlignment.stretch,
-           children: <Widget>[
-             Text(product.productName,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.black,
-              ),
-             ),
-             Text('${product.price}'),
-           ],
-         ),
-       ),
-     );
-   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
