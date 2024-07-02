@@ -28,7 +28,7 @@ class _SignupState extends State<Signup> {
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   letterSpacing: 2.0,
-                  fontSize: 24.7,
+                  fontSize: 30.7,
                 ),
               ),
               SizedBox(height: 30.0,),
