@@ -23,25 +23,26 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'LOGIN',
+                'Welcome Back!',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   letterSpacing: 2.0,
-                  fontSize: 30.7,
+                  fontSize: 25.7,
                 ),
               ),
               SizedBox(height: 30.0,),
               Form(
                 key: formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     TextFormField(
-                      maxLength: 60,
                       decoration: InputDecoration(
-                        label: Text('Username'),
+                        label: Text('Email'),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                        prefixIcon: Icon(Icons.email_outlined)
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -65,6 +66,7 @@ class _LoginState extends State<Login> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                          prefixIcon: Icon(Icons.lock),
                       ),
                       validator: (value){
                         if(value == null || value.isEmpty){
@@ -91,40 +93,42 @@ class _LoginState extends State<Login> {
                           print(password);
                         }
                       },
-                      child: Text('Login'),
+                       child: Text('Login'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.pink[200],
-                        foregroundColor: Colors.white,
+                        foregroundColor: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 25.0,),
-                    ElevatedButton(
-                      onPressed: (){
-                        if(formKey.currentState!.validate()){
-                          formKey.currentState!.save();
-                          print(username);
-                          print(password);
-                        }
-                      },
-                      child: Text('Login to Google'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
-                        foregroundColor: Colors.white,
+                    SizedBox(height: 30.0,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'or login with',
+                      style: TextStyle(
+                        color: Colors.black,
                       ),
                     ),
-                    SizedBox(height: 25.0,),
-                    ElevatedButton(
-                      onPressed: (){
-                        if(formKey.currentState!.validate()){
-                          formKey.currentState!.save();
-                          print(username);
-                          print(password);
-                        }
-                      },
-                      child: Text('Login to Facebook'),
+                  ],
+                ),
+                    SizedBox(height: 20.0,),
+                    ElevatedButton.icon(
+                        onPressed: (){},
+                        icon: Icon(Icons.g_mobiledata),
+                        label: Text('Sign in with Google'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.red,
+                         ),
+                        ),
+                    SizedBox(height: 10.0,),
+                    ElevatedButton.icon(
+                      onPressed: (){},
+                      icon: Icon(Icons.facebook),
+                      label: Text('Sign in with Facebook'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white60,
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blue[300],
                       ),
                     ),
                     SizedBox(height: 30.0),
@@ -132,12 +136,12 @@ class _LoginState extends State<Login> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'Dont have an account?',
+                          'Don\'t have an account? ',
                             style: TextStyle(
                               color: Colors.black,
                             ),
                         ),
-                        SizedBox(height: 30.0),
+                        SizedBox(height: 5.0),
                         InkWell(
                            child: Text(
                              'Sign Up Here',

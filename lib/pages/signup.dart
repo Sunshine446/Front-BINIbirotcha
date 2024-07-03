@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Signup  extends StatefulWidget {
-  const Signup ({super.key});
+class Signup extends StatefulWidget {
+  const Signup({super.key});
 
   @override
   State<Signup> createState() => _SignupState();
@@ -21,66 +21,66 @@ class _SignupState extends State<Signup> {
         child: Padding(
           padding: EdgeInsets.fromLTRB(15.0, 50.0, 10.0, 0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Lets Get Started!',
+                'Let\'s Get Started!',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   letterSpacing: 2.0,
-                  fontSize: 30.7,
+                  fontSize: 25,
                 ),
               ),
-              SizedBox(height: 30.0,),
+              SizedBox(height: 40.0),
               Form(
                 key: formKey,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     TextFormField(
-                      maxLength: 60,
                       decoration: InputDecoration(
                         label: Text('Name'),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                        prefixIcon: Icon(Icons.person),
                       ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please provide a name!';
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide a name';
                         }
-                        if(value.length < 2){
-                          return ' ame should be atleast 8-20 letters long';
+                        if (value.length < 2) {
+                          return 'Name should be at least 2 letters long';
                         }
                         return null;
                       },
-                      onSaved: (value){
+                      onSaved: (value) {
                         name = value!;
                       },
                     ),
-                    SizedBox(height: 30.0,),
+                    SizedBox(height: 30.0),
                     TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      maxLength: 60,
                       decoration: InputDecoration(
                         label: Text('Email'),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                        prefixIcon: Icon(Icons.email_outlined),
                       ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please provide a email!';
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide an email!';
                         }
-                        if(value.length < 2){
-                          return 'Email should be atleast 8-20 letters long';
+                        if (value.length < 5) {
+                          return 'Email should be at least 5 letters long';
                         }
                         return null;
                       },
-                      onSaved: (value){
+                      onSaved: (value) {
                         email = value!;
                       },
                     ),
-                    SizedBox(height: 30.0,),
+                    SizedBox(height: 30.0),
                     TextFormField(
                       obscureText: true,
                       maxLength: 60,
@@ -89,38 +89,93 @@ class _SignupState extends State<Signup> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                        prefixIcon: Icon(Icons.lock),
                       ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
                           return 'Please provide a password!';
                         }
-                        if(value.length < 8){
-                          return 'Password should be atleast 8 letters long';
+                        if (value.length < 8) {
+                          return 'Password should be at least 8 letters long';
                         }
-                        if(value.length >20) {
-                          return 'Password should be atleast 20 letters long';
+                        if (value.length > 20) {
+                          return 'Password should be at most 20 letters long';
                         }
                         return null;
                       },
-                      onSaved: (value){
+                      onSaved: (value) {
                         password = value!;
                       },
                     ),
-                    SizedBox(height: 25.0,),
+                    SizedBox(height: 10.0),
                     ElevatedButton(
-                        onPressed: (){
-                          if(formKey.currentState!.validate()){
-                             formKey.currentState!.save();
-                             print(name);
-                             print(email);
-                             print(password);
-                          }
-                        },
-                        child: Text('Sign up'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.pink[200],
-                          foregroundColor: Colors.white,
+                      onPressed: () {
+                        if (formKey.currentState!.validate()) {
+                          formKey.currentState!.save();
+                          print(name);
+                          print(email);
+                          print(password);
+                        }
+                      },
+                      child: Text('Create Account'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.pink[200],
+                        foregroundColor: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 20.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'or login with',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
                         ),
+                      ],
+                    ),
+                    SizedBox(height: 20.0),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.g_mobiledata),
+                      label: Text('Login with Google'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.red,
+                      ),
+                    ),
+                    SizedBox(height: 15.0),
+                    ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.facebook),
+                      label: Text('Login with Facebook'),
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blue[300],
+                      ),
+                    ),
+                    SizedBox(height: 30.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Already have an account? ',
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(width: 2.0,),
+                        InkWell(
+                          child: Text(
+                            'Login Here',
+                            style: TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                          onTap: () => Navigator.popAndPushNamed(context, '/login'),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
               children: <Widget>[
                 Center(
                   child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/woman.png'),
+                    backgroundImage: AssetImage('assets/sunshine.png'),
                     backgroundColor: Colors.pink[100],
                     radius: 50.0,
                   ),
