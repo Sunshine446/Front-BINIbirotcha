@@ -87,7 +87,7 @@ class _DashboardState extends State<Dashboard> {
               SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/sign-up');
+                  Navigator.pushNamed(context, '/signup');
                 },
                 child: Text(
                   'Sign-up',
