@@ -100,6 +100,7 @@ class _LoginState extends State<Login> {
                         backgroundColor: Colors.pink[200],
                         foregroundColor: Colors.black,
                       ),
+
                     ),
                     SizedBox(height: 30.0,),
                 Row(

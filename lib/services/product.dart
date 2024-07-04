@@ -10,8 +10,6 @@ class Product{
     required this. description,
     required this.price});
 
-
-
   factory Product.fromJSon(Map<String, dynamic> json){
     return switch(json){
       {
