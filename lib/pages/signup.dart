@@ -7,6 +7,7 @@ class Signup extends StatefulWidget {
   State<Signup> createState() => _SignupState();
 }
 
+
 class _SignupState extends State<Signup> {
   final formKey = GlobalKey<FormState>();
   String name = '';
