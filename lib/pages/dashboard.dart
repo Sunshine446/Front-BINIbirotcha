@@ -29,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
             children: [
               Center(
                 child: Image.asset(
-                  'assets/binipot.jpg',
+                  'assets/remove.png',
                   width: 300,
                 ),
               ),
