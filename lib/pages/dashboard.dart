@@ -29,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
             children: [
               Center(
                 child: Image.asset(
-                  'assets/pink.jpg',
+                  'assets/binipot.jpg',
                   width: 300,
                 ),
               ),
@@ -47,7 +47,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.pink[200],
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.pink[300]
                 ),
               ),
               SizedBox(height: 20.0),
@@ -64,13 +64,13 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.pink[50],
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.pink[300]
                 ),
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/signup');
                 },
                 child: Text(
                   'Login',
@@ -81,13 +81,13 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.pink[50],
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.pink[300]
                 ),
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/signup');
+                  Navigator.pushNamed(context, '/login');
                 },
                 child: Text(
                   'Sign-up',
@@ -98,7 +98,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.pink[50],
-                  backgroundColor: Colors.white,
+                  backgroundColor: Colors.pink[300]
                 ),
               ),
             ],
