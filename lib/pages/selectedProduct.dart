@@ -48,7 +48,7 @@ class _selectedProductState extends State<selectedProduct> {
                 children:[
                   IconButton(
                       onPressed: (){
-                       setState: ((){
+                       setState(() {
                          if(numberOfOrders > 1){
                            numberOfOrders -= 1;
                             totalAmount = product.price * numberOfOrders;
