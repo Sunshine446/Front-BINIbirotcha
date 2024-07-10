@@ -16,15 +16,14 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         backgroundColor: Colors.pink[200],
         foregroundColor: Colors.black,
-        title: Text(
-          'DASHBOARD',
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            letterSpacing: 1.0,
+        title: Center(
+          child: Image.asset(
+            'assets/binishine.png',
+            width: 250,
           ),
         ),
         centerTitle: true,
-      ),
+        ),
       backgroundColor: Colors.white,
       body: Center(
         child: Column(
