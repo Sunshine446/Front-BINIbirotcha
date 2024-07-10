@@ -19,7 +19,7 @@ class _DashboardState extends State<Dashboard> {
         title: Center(
           child: Image.asset(
             'assets/binishine.png',
-            width: 250,
+            width: 100,
           ),
         ),
         centerTitle: true,
