@@ -9,6 +9,7 @@ class selectedProduct extends StatefulWidget {
   State<selectedProduct> createState() => _selectedProductState(product: product);
 }
 
+
 class _selectedProductState extends State<selectedProduct> {
   final Product product;
   late double totalAmount;

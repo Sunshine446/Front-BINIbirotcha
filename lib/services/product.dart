@@ -13,6 +13,7 @@ class Product{
     required this.url});
 
 
+
   factory Product.fromJSon(Map<String, dynamic> json){
     return switch(json){
       {
