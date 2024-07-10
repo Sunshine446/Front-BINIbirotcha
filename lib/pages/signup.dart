@@ -63,6 +63,8 @@ class _SignupState extends State<Signup> {
                     TextFormField(
                       decoration: InputDecoration(
                         label: Text('Name'),
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
@@ -81,10 +83,13 @@ class _SignupState extends State<Signup> {
                         name = value!;
                       },
                     ),
+
                     SizedBox(height: 30.0),
                     TextFormField(
                       decoration: InputDecoration(
                         label: Text('Email'),
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
@@ -110,6 +115,8 @@ class _SignupState extends State<Signup> {
                       obscureText: _obscure,
                       decoration: InputDecoration(
                         label: Text('Password'),
+                        filled: true,
+                        fillColor: Colors.white70,
                         prefixIcon: Icon(Icons.lock_rounded),
                         suffixIcon: IconButton(
                           icon: Icon(_obscureIcon),
@@ -160,7 +167,7 @@ class _SignupState extends State<Signup> {
                       },
                       child: Text('Create Account'),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink[200],
+                        backgroundColor: Colors.pink,
                         foregroundColor: Colors.black,
                       ),
                     ),
@@ -183,7 +190,7 @@ class _SignupState extends State<Signup> {
                       label: Text('Login with Google'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Colors.red,
+                        backgroundColor: Colors.red[900],
                       ),
                     ),
                     SizedBox(height: 15.0),
@@ -193,7 +200,7 @@ class _SignupState extends State<Signup> {
                       label: Text('Login with Facebook'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Colors.blue[300],
+                        backgroundColor: Colors.blue[900],
                       ),
                     ),
                     SizedBox(height: 30.0),

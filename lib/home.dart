@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('BINI Merch'),
+        title: Text('My Profile'),
         backgroundColor: Colors.pink[200],
         centerTitle: true,
       ),
@@ -114,8 +114,10 @@ class _HomeState extends State<Home> {
                     fontSize: 22.0,
                   ),
                 ),
+
               ],
             ),
+
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [

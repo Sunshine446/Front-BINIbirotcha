@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:untitled1/services/User.dart';
 
 class Login  extends StatefulWidget {
   const Login ({super.key});
@@ -9,8 +13,32 @@ class Login  extends StatefulWidget {
 
 class _LoginState extends State<Login> {
   final formKey = GlobalKey<FormState>();
-  String username = '';
+  String email = '';
   String password = '';
+  bool _obscure = true;
+  IconData _obscureIcon = Icons.visibility_off;
+
+  Widget buttonContent = Text('Login');
+
+  Widget loadingDisplay = CircularProgressIndicator();
+
+  Future<bool> login(User user)async{
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8080/api/v1/auth/login'),
+      headers: <String, String>{
+        'Content-Type' : 'Application/json; charset=UTF-8'
+    },
+      body: jsonEncode(<String, dynamic>{
+        'usernameOrEmail' : user.email,
+        'password' : user.password
+      }),
+    );
+    if (response.statusCode ==200){
+      return true;
+    }
+    return false;
+    //print(response.body);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +52,10 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'Welcome Back!',
+                'LOGIN',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
-                  letterSpacing: 2.0,
+                  letterSpacing: 1.0,
                   fontSize: 25.7,
                 ),
               ),
@@ -40,6 +68,8 @@ class _LoginState extends State<Login> {
                     TextFormField(
                       decoration: InputDecoration(
                         label: Text('Email'),
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
@@ -55,19 +85,34 @@ class _LoginState extends State<Login> {
                         return null;
                       },
                       onSaved: (value) {
-                        username = value!;
+                        email = value!;
                       },
                     ),
                     SizedBox(height: 30.0,),
                     TextFormField(
-                      obscureText: true,
+                      obscureText: _obscure,
                       maxLength: 60,
                       decoration: InputDecoration(
                         label: Text('Password'),
+                        filled: true,
+                        fillColor: Colors.white70,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                           prefixIcon: Icon(Icons.lock),
+                        suffixIcon: IconButton(
+                          icon: Icon(_obscureIcon),
+                          onPressed: (){
+                            setState(() {
+                              _obscure = !_obscure;
+                              if(_obscure){
+                                _obscureIcon = Icons.visibility_off;
+                              }else{
+                                _obscureIcon = Icons.visibility;
+                              }
+                            });
+                          },
+                        ),
                       ),
                       validator: (value){
                         if(value == null || value.isEmpty){
@@ -88,16 +133,36 @@ class _LoginState extends State<Login> {
                     SizedBox(height: 25.0,),
                     ElevatedButton(
                       onPressed: (){
-                        if(formKey.currentState!.validate()){
+                        if(formKey.currentState!.validate()) {
                           formKey.currentState!.save();
-                          print(username);
-                          print(password);
+                          User user = User(
+                            username: '',
+                            email: email,
+                            password: password,
+                          );
+                          /*if(login(user)) {
+                            Navigator.pushReplacementNamed(context, '/dashboard');
+                          }*/
+                          setState(() {
+                            buttonContent = FutureBuilder(
+                                future: login(user),
+                                builder: (context, snapshots){
+                                  if(snapshots.connectionState == ConnectionState.waiting){
+                                    return loadingDisplay;
+                                  }
+                                  if(snapshots.hasData){
+
+                                  }
+                                  return Text('Log in');
+                                }
+                            );
+                          });
                           Navigator.pushReplacementNamed(context, '/dashboard');
                         }
                       },
-                       child: Text('Login'),
+                       child: buttonContent,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink[200],
+                        backgroundColor: Colors.pink,
                         foregroundColor: Colors.black,
                       ),
 
@@ -121,7 +186,7 @@ class _LoginState extends State<Login> {
                         label: Text('Sign in with Google'),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.red[900],
                          ),
                         ),
                     SizedBox(height: 10.0,),
@@ -131,7 +196,7 @@ class _LoginState extends State<Login> {
                       label: Text('Sign in with Facebook'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
-                        backgroundColor: Colors.blue[300],
+                        backgroundColor: Colors.blue[900],
                       ),
                     ),
                     SizedBox(height: 30.0),
