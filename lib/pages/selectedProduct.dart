@@ -36,11 +36,7 @@ class _selectedProductState extends State<selectedProduct> {
         children: [
           Column(
             children: [
-              Container(
-                width: 400,
-                height: 400,
-                  child: Image.network(product.url),
-              ),
+              Image.network(product.url),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

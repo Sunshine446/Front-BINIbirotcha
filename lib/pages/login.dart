@@ -47,185 +47,194 @@ class _LoginState extends State<Login> {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.pink[100],
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(15.0, 50.0, 10.0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                'LOGIN',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 1.0,
-                  fontSize: 25.7,
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/bob.jpg'),
+                fit: BoxFit.cover
+            ),
+          ),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(15.0, 50.0, 10.0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: 130.0,),
+                Text(
+                  'LOGIN',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: 1.0,
+                    fontSize: 25.7,
+                  ),
                 ),
-              ),
-              SizedBox(height: 30.0,),
-              Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: InputDecoration(
-                        label: Text('Email'),
-                        filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
+                SizedBox(height: 30.0,),
+                Form(
+                  key: formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      TextFormField(
+                        decoration: InputDecoration(
+                          label: Text('Email'),
+                          filled: true,
+                          fillColor: Colors.white70,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          prefixIcon: Icon(Icons.email_outlined)
                         ),
-                        prefixIcon: Icon(Icons.email_outlined)
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please provide a name!';
+                          }
+                          if (value.length < 2) {
+                            return ' ame should be atleast 8-20 letters long';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          email = value!;
+                        },
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please provide a name!';
-                        }
-                        if (value.length < 2) {
-                          return ' ame should be atleast 8-20 letters long';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        email = value!;
-                      },
-                    ),
-                    SizedBox(height: 30.0,),
-                    TextFormField(
-                      obscureText: _obscure,
-                      maxLength: 60,
-                      decoration: InputDecoration(
-                        label: Text('Password'),
-                        filled: true,
-                        fillColor: Colors.white70,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                          prefixIcon: Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(_obscureIcon),
-                          onPressed: (){
-                            setState(() {
-                              _obscure = !_obscure;
-                              if(_obscure){
-                                _obscureIcon = Icons.visibility_off;
-                              }else{
-                                _obscureIcon = Icons.visibility;
-                              }
-                            });
-                          },
-                        ),
-                      ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return 'Please provide a password!';
-                        }
-                        if(value.length < 8){
-                          return 'Password should be atleast 8 letters long';
-                        }
-                        if(value.length >20) {
-                          return 'Password should be atleast 20 letters long';
-                        }
-                        return null;
-                      },
-                      onSaved: (value){
-                        password = value!;
-                      },
-                    ),
-                    SizedBox(height: 25.0,),
-                    ElevatedButton(
-                      onPressed: (){
-                        if(formKey.currentState!.validate()) {
-                          formKey.currentState!.save();
-                          User user = User(
-                            username: '',
-                            email: email,
-                            password: password,
-                          );
-                          /*if(login(user)) {
-                            Navigator.pushReplacementNamed(context, '/dashboard');
-                          }*/
-                          setState(() {
-                            buttonContent = FutureBuilder(
-                                future: login(user),
-                                builder: (context, snapshots){
-                                  if(snapshots.connectionState == ConnectionState.waiting){
-                                    return loadingDisplay;
-                                  }
-                                  if(snapshots.hasData){
-
-                                  }
-                                  return Text('Log in');
+                      SizedBox(height: 30.0,),
+                      TextFormField(
+                        obscureText: _obscure,
+                        maxLength: 60,
+                        decoration: InputDecoration(
+                          label: Text('Password'),
+                          filled: true,
+                          fillColor: Colors.white70,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                            prefixIcon: Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(_obscureIcon),
+                            onPressed: (){
+                              setState(() {
+                                _obscure = !_obscure;
+                                if(_obscure){
+                                  _obscureIcon = Icons.visibility_off;
+                                }else{
+                                  _obscureIcon = Icons.visibility;
                                 }
+                              });
+                            },
+                          ),
+                        ),
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                            return 'Please provide a password!';
+                          }
+                          if(value.length < 8){
+                            return 'Password should be atleast 8 letters long';
+                          }
+                          if(value.length >20) {
+                            return 'Password should be atleast 20 letters long';
+                          }
+                          return null;
+                        },
+                        onSaved: (value){
+                          password = value!;
+                        },
+                      ),
+                      SizedBox(height: 25.0,),
+                      ElevatedButton(
+                        onPressed: (){
+                          if(formKey.currentState!.validate()) {
+                            formKey.currentState!.save();
+                            User user = User(
+                              username: '',
+                              email: email,
+                              password: password,
                             );
-                          });
-                          Navigator.pushReplacementNamed(context, '/dashboard');
-                        }
-                      },
-                       child: buttonContent,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink,
-                        foregroundColor: Colors.black,
-                      ),
+                            /*if(login(user)) {
+                              Navigator.pushReplacementNamed(context, '/dashboard');
+                            }*/
+                            setState(() {
+                              buttonContent = FutureBuilder(
+                                  future: login(user),
+                                  builder: (context, snapshots){
+                                    if(snapshots.connectionState == ConnectionState.waiting){
+                                      return loadingDisplay;
+                                    }
+                                    if(snapshots.hasData){
 
-                    ),
-                    SizedBox(height: 30.0,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'or login with',
-                      style: TextStyle(
-                        color: Colors.black,
+                                    }
+                                    return Text('Log in');
+                                  }
+                              );
+                            });
+                            Navigator.pushReplacementNamed(context, '/dashboard');
+                          }
+                        },
+                         child: buttonContent,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.pink,
+                          foregroundColor: Colors.black,
+                        ),
+
                       ),
-                    ),
-                  ],
-                ),
-                    SizedBox(height: 20.0,),
-                    ElevatedButton.icon(
+                      SizedBox(height: 30.0,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'or login with',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                      SizedBox(height: 20.0,),
+                      ElevatedButton.icon(
+                          onPressed: (){},
+                          icon: Icon(Icons.g_mobiledata),
+                          label: Text('Sign in with Google'),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.red[900],
+                           ),
+                          ),
+                      SizedBox(height: 10.0,),
+                      ElevatedButton.icon(
                         onPressed: (){},
-                        icon: Icon(Icons.g_mobiledata),
-                        label: Text('Sign in with Google'),
+                        icon: Icon(Icons.facebook),
+                        label: Text('Sign in with Facebook'),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Colors.red[900],
-                         ),
+                          backgroundColor: Colors.blue[900],
                         ),
-                    SizedBox(height: 10.0,),
-                    ElevatedButton.icon(
-                      onPressed: (){},
-                      icon: Icon(Icons.facebook),
-                      label: Text('Sign in with Facebook'),
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.white,
-                        backgroundColor: Colors.blue[900],
                       ),
-                    ),
-                    SizedBox(height: 30.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Don\'t have an account? ',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                        ),
-                        SizedBox(height: 5.0),
-                        InkWell(
-                           child: Text(
-                             'Sign Up Here',
-                             style: TextStyle(
-                               color: Colors.blue
+                      SizedBox(height: 30.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'Don\'t have an account? ',
+                              style: TextStyle(
+                                color: Colors.black,
+                              ),
+                          ),
+                          SizedBox(height: 5.0),
+                          InkWell(
+                             child: Text(
+                               'Sign Up Here',
+                               style: TextStyle(
+                                 color: Colors.blue
+                               ),
                              ),
-                           ),
-                          onTap: () => Navigator.popAndPushNamed(context, '/signup'),
-                        ),
-                      ],
-                    ),
-                  ],
+                            onTap: () => Navigator.popAndPushNamed(context, '/signup'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

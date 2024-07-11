@@ -22,11 +22,21 @@ class _MenuState extends State<Menu> {
      final response = await http.get(
          Uri.parse('http://10.0.2.2:8080/api/v1/product/all'));
      final data = jsonDecode(response.body);
-     print(data);
      List products = <Product>[];
      for (var product in data) {
-       products.add(Product.fromJSon(product));
+       Product sample = Product.fromJSon(product);
+       print(sample.productName);
+       products.add(
+         Product(
+             id: product['id'],
+             productName: product['productName'],
+             description: product['description'],
+             price: product['price'],
+             url: product['url']
+         )
+       );
      }
+     print(products);
      return products;
    }
 
@@ -51,55 +61,63 @@ class _MenuState extends State<Menu> {
         ),
         centerTitle: true,
       ),
-     body: Padding(
-       padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
-       child: FutureBuilder(
-         future: products,
-         builder: (context, snapshots) {
-           if (snapshots.connectionState == ConnectionState.waiting) {
-             return Center(
-               child: SpinKitHourGlass(
-                 color: Colors.pink,
-                 size: 60.0,
-               ),
-             );
-           }
-           if (snapshots.hasData) {
-             List products = snapshots.data!;
-             return Padding(
-               padding: EdgeInsets.all(3.0),
-               child: ListView.builder(
-                   itemCount: products.length,
-                   itemBuilder: (context, index) {
-                     return Card(
-                       child: ListTile(
-                         title: Column(
+     body: Container(
+       decoration: BoxDecoration(
+         image: DecorationImage(
+             image: AssetImage('assets/gege.jpg'),
+             fit: BoxFit.cover
+         ),
+       ),
+       child: Padding(
+         padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+         child: FutureBuilder(
+           future: products,
+           builder: (context, snapshots) {
+             if (snapshots.connectionState == ConnectionState.waiting) {
+               return Center(
+                 child: SpinKitHourGlass(
+                   color: Colors.pink,
+                   size: 60.0,
+                 ),
+               );
+             }
+             if (snapshots.hasData) {
+               List products = snapshots.data!;
+               return Padding(
+                 padding: EdgeInsets.all(3.0),
+                 child: ListView.builder(
+                     itemCount: products.length,
+                     itemBuilder: (context, index) {
+                       return Card(
+                         child: ListTile(
+                           title: Column(
 
-                           crossAxisAlignment: CrossAxisAlignment.start,
-                           children: [
-                             Text(products[index].productName),
-                             Text(products[index].price.toString())
-                           ],
+                             crossAxisAlignment: CrossAxisAlignment.start,
+                             children: [
+                               Text(products[index].productName),
+                               Text(products[index].price.toString())
+                             ],
+                           ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => selectedProduct(product: products[index]),
+                                  )
+                              );
+                            },
+
                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => selectedProduct(product: products[index]),
-                                )
-                            );
-                          },
-
-                       ),
-                     );
-                   }
-               ),
+                       );
+                     }
+                 ),
+               );
+             }
+             return Center(
+               child: Text('Unable to load data'),
              );
-           }
-           return Center(
-             child: Text('Unable to load data'),
-           );
-         },
+           },
+         ),
        ),
      ),
     );
